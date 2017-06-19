@@ -6,9 +6,8 @@ using std::cout;
 
 Order::Order() {};
 
-Order::Order(int _id, string _name, string _instrument, int _quantity, double _price)
+Order::Order(string _name, string _instrument, int _quantity, double _price)
 {
-id = _id;
 name = _name;
 instrument = _instrument;
 quantity = _quantity;

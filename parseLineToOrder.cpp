@@ -26,7 +26,7 @@ s.erase(0, pos + delimiter.length());
 
 istringstream(s) >> price;
 
-Order myOrder(1,name,instrument,quantity,price);
+Order myOrder(name,instrument,quantity,price);
 //myOrder.print();
 
 return myOrder;

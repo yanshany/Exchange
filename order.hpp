@@ -6,14 +6,13 @@ using std::string;
 class Order 
 {
 public:
-	int id;
 	string name;
 	string instrument;
 	int quantity;
 	double price;	
 public: 
 	Order();
-	Order(int id, string name, string instrument, int quantity, double price);
+	Order(string name, string instrument, int quantity, double price);
 	void print() const;
 
 };
