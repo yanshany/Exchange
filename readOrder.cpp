@@ -50,19 +50,20 @@ for (int i = 1; i != allOrder.size(); ++i ){
 		{
 			myTrade.push_back(Trade(newOrder.name, candidate[0].name, newOrder.instrument,min(newOrder.quantity,-1*candidate[0].quantity), candidate[0].price));				
 			openOrder = updateOpenOrder(newOrder,openOrder,ind[0]);	
-		}	
+		}
+
 		if (ind.size() > 1)
 		{
 			indBestCandidate = chooseCandidate(newOrder,candidate);
 			myTrade.push_back(Trade(newOrder.name, openOrder[ind[indBestCandidate]].name, newOrder.instrument,min(newOrder.quantity,-1*openOrder[ind[indBestCandidate]].quantity), openOrder[ind[indBestCandidate]].price));				
 			openOrder = updateOpenOrder(newOrder,openOrder,ind[indBestCandidate]);
 		}
+		
 		ind.clear(); 
 		candidate.clear();
 	}
 	if (newOrder.quantity < 0)
 	{
-
 		for (int j = 0; j != openOrderCopy.size(); ++j){
 			if(newOrder.instrument == openOrder[j].instrument && openOrder[j].quantity > 0 && openOrder[j].price >= newOrder.price)
 			{
@@ -78,60 +79,18 @@ for (int i = 1; i != allOrder.size(); ++i ){
 		{
 			myTrade.push_back(Trade(openOrder[ind[0]].name,newOrder.name, newOrder.instrument,min(-1*newOrder.quantity,openOrder[ind[0]].quantity), openOrder[ind[0]].price));				
 			openOrder = updateOpenOrder(newOrder,openOrder,ind[0]);		
-		}	
+		}
+
 		if (ind.size() > 1)
 		{
 			indBestCandidate = chooseCandidate(newOrder,candidate);
 			myTrade.push_back(Trade(openOrder[ind[indBestCandidate]].name, newOrder.name, newOrder.instrument,min(-1*newOrder.quantity,openOrder[ind[indBestCandidate]].quantity), openOrder[ind[indBestCandidate]].price));				
 			openOrder = updateOpenOrder(newOrder,openOrder,ind[indBestCandidate]);
 		}
+
 		ind.clear(); 
 		candidate.clear();
-
 	}
-
-
-/*	for (int j = 0; j != openOrderCopy.size(); ++j) {
-
-		if(newOrder.instrument == openOrder[j].instrument && newOrder.quantity*openOrder[j].quantity < 0)
-		{
-			if(newOrder.quantity > 0 && newOrder.price >= openOrder[j].price)
-			{
-				myTrade.push_back(Trade(newOrder.name, openOrder[j].name, newOrder.instrument,min(newOrder.quantity,-1*openOrder[j].quantity), openOrder[j].price));				
-				if(newOrder.quantity < -1*openOrder[j].quantity)
-					 openOrder[j].quantity += newOrder.quantity;
-				else if (newOrder.quantity > -1*openOrder[j].quantity) 
-				{
-					openOrder.push_back(Order(newOrder.name,newOrder.instrument,newOrder.quantity + openOrder[j].quantity, newOrder.price));
-					openOrder.erase(openOrder.begin()+j);
-				}
-				else 
-					openOrder.erase(openOrder.begin()+j);
-				
-
-			}				
-			else if (newOrder.quantity < 0 && newOrder.price <= openOrder[j].price)
-			{
-				myTrade.push_back(Trade(openOrder[j].name, newOrder.name, newOrder.instrument,min(-1*newOrder.quantity,openOrder[j].quantity), openOrder[j].price));				
-				if(-1*newOrder.quantity < openOrder[j].quantity) 
-					openOrder[j].quantity += newOrder.quantity;
-				else if(-1*newOrder.quantity > openOrder[j].quantity) 
-				{
-					openOrder.push_back(Order(newOrder.name,newOrder.instrument,newOrder.quantity + openOrder[j].quantity, newOrder.price));
-					openOrder.erase(openOrder.begin()+j);
-				}
-				else
-					openOrder.erase(openOrder.begin()+j);
-
-			}
-			else
-				openOrder.push_back(newOrder);
-					
-		}
-		else
-			openOrder.push_back(newOrder);
-
-	} */
 	openOrderCopy = openOrder;
 }
 
