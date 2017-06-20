@@ -2,6 +2,7 @@
 #include "trade.hpp"
 #include "parseLineToOrder.hpp"
 #include "chooseCandidate.hpp"
+#include "updateOpenOrder.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -48,34 +49,13 @@ for (int i = 1; i != allOrder.size(); ++i ){
 		if (ind.size() == 1)
 		{
 			myTrade.push_back(Trade(newOrder.name, candidate[0].name, newOrder.instrument,min(newOrder.quantity,-1*candidate[0].quantity), candidate[0].price));				
-
-			if (newOrder.quantity < -1*candidate[0].quantity)
-				openOrder[ind[0]].quantity += newOrder.quantity;
-			else if (newOrder.quantity > -1*candidate[0].quantity) 
-			{
-				openOrder.push_back(Order(newOrder.name,newOrder.instrument,newOrder.quantity + candidate[0].quantity, newOrder.price));
-				openOrder.erase(openOrder.begin()+ind[0]);
-			}
-			else 
-				openOrder.erase(openOrder.begin()+ind[0]);
-		
+			openOrder = updateOpenOrder(newOrder,openOrder,ind[0]);	
 		}	
 		if (ind.size() > 1)
 		{
 			indBestCandidate = chooseCandidate(newOrder,candidate);
-
 			myTrade.push_back(Trade(newOrder.name, openOrder[ind[indBestCandidate]].name, newOrder.instrument,min(newOrder.quantity,-1*openOrder[ind[indBestCandidate]].quantity), openOrder[ind[indBestCandidate]].price));				
-
-			if (newOrder.quantity < -1*openOrder[ind[indBestCandidate]].quantity)
-				openOrder[ind[indBestCandidate]].quantity += newOrder.quantity;
-			else if (newOrder.quantity > -1*openOrder[ind[indBestCandidate]].quantity) 
-			{
-				openOrder.push_back(Order(newOrder.name,newOrder.instrument,newOrder.quantity + openOrder[ind[indBestCandidate]].quantity, newOrder.price));
-				openOrder.erase(openOrder.begin()+ind[0]);
-			}
-			else 
-				openOrder.erase(openOrder.begin()+ind[0]);
-
+			openOrder = updateOpenOrder(newOrder,openOrder,ind[indBestCandidate]);
 		}
 		ind.clear(); 
 		candidate.clear();
@@ -97,34 +77,13 @@ for (int i = 1; i != allOrder.size(); ++i ){
 		if (ind.size() == 1)
 		{
 			myTrade.push_back(Trade(openOrder[ind[0]].name,newOrder.name, newOrder.instrument,min(-1*newOrder.quantity,openOrder[ind[0]].quantity), openOrder[ind[0]].price));				
-
-			if (-1*newOrder.quantity < openOrder[ind[0]].quantity)
-				openOrder[ind[0]].quantity += newOrder.quantity;
-			else if (-1*newOrder.quantity > openOrder[ind[0]].quantity) 
-			{
-				openOrder.push_back(Order(newOrder.name,newOrder.instrument,newOrder.quantity + openOrder[ind[0]].quantity, newOrder.price));
-				openOrder.erase(openOrder.begin()+ind[0]);
-			}
-			else 
-				openOrder.erase(openOrder.begin()+ind[0]);
-		
+			openOrder = updateOpenOrder(newOrder,openOrder,ind[0]);		
 		}	
 		if (ind.size() > 1)
 		{
 			indBestCandidate = chooseCandidate(newOrder,candidate);
-
 			myTrade.push_back(Trade(openOrder[ind[indBestCandidate]].name, newOrder.name, newOrder.instrument,min(-1*newOrder.quantity,openOrder[ind[indBestCandidate]].quantity), openOrder[ind[indBestCandidate]].price));				
-
-			if (-1*newOrder.quantity < openOrder[ind[indBestCandidate]].quantity)
-				openOrder[ind[indBestCandidate]].quantity += newOrder.quantity;
-			else if (-1*newOrder.quantity > openOrder[ind[indBestCandidate]].quantity) 
-			{
-				openOrder.push_back(Order(newOrder.name,newOrder.instrument,newOrder.quantity + openOrder[ind[indBestCandidate]].quantity, newOrder.price));
-				openOrder.erase(openOrder.begin()+ind[0]);
-			}
-			else 
-				openOrder.erase(openOrder.begin()+ind[0]);
-
+			openOrder = updateOpenOrder(newOrder,openOrder,ind[indBestCandidate]);
 		}
 		ind.clear(); 
 		candidate.clear();
