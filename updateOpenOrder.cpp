@@ -6,7 +6,8 @@ using namespace std;
 
 vector<Order> updateOpenOrder(Order newOrder, vector<Order> openOrder, int ind)
 {
-    if (newOrder.quantity > 0)
+// update the order book by comparing the size of the new order and the matched order, the matched order the ind'th order in the order book
+    if (newOrder.quantity > 0) 
     {
         if (newOrder.quantity < -1 * openOrder[ind].quantity)
             openOrder[ind].quantity += newOrder.quantity;
