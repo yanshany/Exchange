@@ -15,7 +15,7 @@ all:	test_order test_trade Exchange
 clean:
 	@rm -f *.o test_order test_trade Exchange
         
-Exchange:	readOrder.o $(OBJS)
+Exchange:	main.o $(OBJS)
 	$(CXX) -o $@ $^ $(CFLAGS)
 
 test_order:	test_order.o $(OBJS)
