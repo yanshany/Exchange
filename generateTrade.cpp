@@ -7,7 +7,7 @@
 #include <memory>
 using namespace std;
 
-vector<shared_ptr<Trade>> generateTrade(Order newOrder, vector<shared_ptr<Order>> openOrder, vector<shared_ptr<Trade>> myTrade)
+vector<shared_ptr<Trade>> generateTrade(Order newOrder, vector<shared_ptr<Order>> &openOrder, vector<shared_ptr<Trade>> myTrade)
 {
     vector<shared_ptr<Order>> candidate;
 
