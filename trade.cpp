@@ -1,22 +1,18 @@
 #include "trade.hpp"
 #include <iostream>
-#include <string>
-using std::string;
-using std::cout;
 
-Trade::Trade() {};
+Trade::Trade(){};
 
-Trade::Trade(string _name1, string _name2, string _instrument, int _quantity, double _price)
+Trade::Trade(std::string _name1, std::string _name2, std::string _instrument, int _quantity, double _price)
 {
-name1 = _name1;
-name2 = _name2;
-instrument = _instrument;
-quantity = _quantity;
-price = _price;
+    m_name1 = _name1;
+    m_name2 = _name2;
+    m_instrument = _instrument;
+    m_quantity = _quantity;
+    m_price = _price;
 }
 
 void Trade::print() const
 {
-cout <<  name1 <<  ":" << name2 << ":" <<  instrument << ":" << quantity << ":" << price << std::endl;
+    std::cout << m_name1 << ":" << m_name2 << ":" << m_instrument << ":" << m_quantity << ":" << m_price << std::endl;
 }
-

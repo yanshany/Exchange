@@ -1,21 +1,17 @@
 #include "order.hpp"
 #include <iostream>
-#include <string>
-using std::string;
-using std::cout;
 
-Order::Order() {};
+Order::Order(){};
 
-Order::Order(string _name, string _instrument, int _quantity, double _price)
+Order::Order(const std::string _name, const std::string _instrument, int _quantity, double _price)
 {
-name = _name;
-instrument = _instrument;
-quantity = _quantity;
-price = _price;
+    name(_name);
+    instrument(_instrument);
+    quantity(_quantity);
+    price(_price);
 }
 
 void Order::print() const
 {
-cout  << name << ":" <<  instrument << ":" << quantity << ":" << price << std::endl;
+    std::cout << m_name << ":" << m_instrument << ":" << m_quantity << ":" << m_price << std::endl;
 }
-

@@ -1,35 +1,30 @@
-# include "parseLineToOrder.hpp"
-# include "order.hpp"
-# include <string>
-# include <sstream>
-using namespace std;
+#include "parseLineToOrder.hpp"
+#include "order.hpp"
+#include <string>
+#include <sstream>
 
-Order parseLineToOrder(string s, string delimiter)
+Order parseLineToOrder(std::string s, std::string delimiter)
 {
+    size_t pos;
+    std::string name, instrument;
+    int quantity;
+    double price;
 
-size_t pos;
-string name,instrument;
-int quantity;
-double price;
+    pos = s.find(delimiter);
+    name = s.substr(0, pos);
+    s.erase(0, pos + delimiter.length());
 
-pos = s.find(delimiter);
-name = s.substr(0, pos);
-s.erase(0, pos + delimiter.length());
+    pos = s.find(delimiter);
+    instrument = s.substr(0, pos);
+    s.erase(0, pos + delimiter.length());
 
-pos = s.find(delimiter);
-instrument = s.substr(0, pos);
-s.erase(0, pos + delimiter.length());
+    pos = s.find(delimiter);
+    std::istringstream(s.substr(0, pos)) >> quantity;
+    s.erase(0, pos + delimiter.length());
 
-pos = s.find(delimiter);
-istringstream(s.substr(0, pos)) >> quantity;
-s.erase(0, pos + delimiter.length());
+    std::istringstream(s) >> price;
 
-istringstream(s) >> price;
+    Order myOrder(name, instrument, quantity, price);
 
-Order myOrder(name,instrument,quantity,price);
-//myOrder.print();
-
-return myOrder;
-
+    return myOrder;
 };
-

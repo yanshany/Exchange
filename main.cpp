@@ -3,32 +3,24 @@
 #include "parseLineToOrder.hpp"
 #include "generateTrade.hpp"
 #include <iostream>
-#include <fstream>
 #include <string>
 #include <vector>
-#include <algorithm>
 #include <memory>
-using namespace std;
 
 int main()
 {
-	string s;
-	string delimiter = ":";
-	Order newOrder = Order();
-	vector<Order> allOrder;
-	vector<shared_ptr<Trade>> myTrade;
-    vector<shared_ptr<Order>> openOrder;
+	std::string s;
+	const std::string delimiter = ":";
+	Order newOrder;
+	std::vector<std::shared_ptr<Trade>> myTrade;
+    std::vector<std::shared_ptr<Order>> openOrder;
 
-	// read in orders from standard input
-	while (getline(cin, s))
-	{
-		allOrder.push_back(parseLineToOrder(s, delimiter));
-	}
+	std::getline(std::cin,s);
+	openOrder.push_back(std::make_shared<Order>(parseLineToOrder(s, delimiter)));
 
-	openOrder.push_back(make_shared<Order>(allOrder[0]));
-	for (int i = 1; i != allOrder.size(); ++i)
+	while (std::getline(std::cin,s))
 	{
-		newOrder = allOrder[i];
+		newOrder = parseLineToOrder(s, delimiter);
 		myTrade = generateTrade(newOrder,openOrder,myTrade);
 	}
 

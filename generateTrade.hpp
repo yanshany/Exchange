@@ -1,9 +1,8 @@
+#ifndef GenerateTrade_HPP
+#define GenerateTrade_HPP
 #include "order.hpp"
 #include "trade.hpp"
-#include <string>
 #include <vector>
-#include <algorithm>
 #include <memory>
-using namespace std;
-
-vector<shared_ptr<Trade>> generateTrade(Order newOrder, vector<shared_ptr<Order>> &openOrder, vector<shared_ptr<Trade>> myTrade);
+std::vector<std::shared_ptr<Trade>> generateTrade(Order newOrder, std::vector<std::shared_ptr<Order>> &openOrder, std::vector<std::shared_ptr<Trade>> myTrade);
+#endif
