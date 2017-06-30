@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 
-Order parseLineToOrder(std::string s, std::string delimiter)
+Order parseLineToOrder(std::string &s, std::string delimiter)
 {
     size_t pos;
     std::string name, instrument;

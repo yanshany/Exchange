@@ -1,6 +1,6 @@
 
 CXX=g++
-CFLAGS=-I. -I/usr/local/include -std=c++11
+CFLAGS=-I. -I/usr/local/include -std=c++14 -O3
 DEPS =
 OBJS = order.o trade.o generateTrade.o parseLineToOrder.o
 LIBS = -lboost_unit_test_framework

@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <memory>
 
-std::vector<std::shared_ptr<Trade>> generateTrade(Order newOrder, std::vector<std::shared_ptr<Order>> &openOrder, std::vector<std::shared_ptr<Trade>> myTrade)
+void generateTrade(Order &newOrder, std::vector<std::shared_ptr<Order>> &openOrder, std::vector<std::shared_ptr<Trade>> &myTrade)
 {
     std::vector<std::shared_ptr<Order>> candidate;
 
@@ -48,6 +48,7 @@ std::vector<std::shared_ptr<Trade>> generateTrade(Order newOrder, std::vector<st
                     break;
                 }
             }
+            candidate.erase(std::remove_if(candidate.begin(),candidate.end(),[](const auto &p){return p->quantity() == 0;}),candidate.end());
         }
     }
 
@@ -91,8 +92,7 @@ std::vector<std::shared_ptr<Trade>> generateTrade(Order newOrder, std::vector<st
                     break;
                 }
             }
+            candidate.erase(std::remove_if(candidate.begin(),candidate.end(),[](const auto &p){return p->quantity() == 0;}),candidate.end());
         }
     }
-
-    return myTrade;
 };
