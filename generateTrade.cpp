@@ -4,18 +4,18 @@
 #include <algorithm>
 #include <memory>
 
-void generateTrade(Order &newOrder, std::vector<std::shared_ptr<Order>> &openOrder, std::vector<std::shared_ptr<Trade>> &myTrade)
+void generateTrade(Order &newOrder, std::vector<std::shared_ptr<Order>> &openOrder, std::vector<Trade> &myTrade)
 {
     std::vector<std::shared_ptr<Order>> candidate;
 
     if (newOrder.quantity() > 0) // buy order
     {
         // find sell orders in order book matching instument and acceptable price
-        for (int j = 0; j != openOrder.size(); ++j)
+        for (std::vector<std::shared_ptr<Order>>::iterator j = openOrder.begin(); j != openOrder.end(); ++j)
         {
-            if (newOrder.instrument() == openOrder[j]->instrument() && openOrder[j]->quantity() < 0 && openOrder[j]->price() <= newOrder.price())
+            if (newOrder.instrument() == (*j)->instrument() && (*j)->quantity() < 0 && (*j)->price() <= newOrder.price())
             {
-                candidate.push_back(openOrder[j]);
+                candidate.push_back(*j);
             }
         }
 
@@ -29,22 +29,22 @@ void generateTrade(Order &newOrder, std::vector<std::shared_ptr<Order>> &openOrd
                 return lhs->price() < rhs->price();
             });
             // matching new order with candidates in order book
-            for (int k = 0; k != candidate.size(); ++k)
+            for (std::vector<std::shared_ptr<Order>>::iterator k = candidate.begin(); k != candidate.end(); ++k)
             {
-                myTrade.push_back(std::make_shared<Trade>(newOrder.name(), candidate[k]->name(), newOrder.instrument(), std::min(newOrder.quantity(), -1 * candidate[k]->quantity()), candidate[k]->price()));
-                if (newOrder.quantity() < -1 * candidate[k]->quantity())
+                myTrade.push_back(Trade(newOrder.name(), (*k)->name(), newOrder.instrument(), std::min(newOrder.quantity(), -1 * (*k)->quantity()), (*k)->price()));
+                if (newOrder.quantity() < -1 * (*k)->quantity())
                 {
-                    candidate[k]->quantity(candidate[k]->quantity() + newOrder.quantity());
+                    (*k)->quantity((*k)->quantity() + newOrder.quantity());
                     break;
                 }
-                else if (newOrder.quantity() > -1 * candidate[k]->quantity())
+                else if (newOrder.quantity() > -1 * (*k)->quantity())
                 {
-                    newOrder.quantity(newOrder.quantity() + candidate[k]->quantity());
-                    candidate[k]->quantity(0);
+                    newOrder.quantity(newOrder.quantity() + (*k)->quantity());
+                    (*k)->quantity(0);
                 }
                 else
                 {
-                    candidate[k]->quantity(0);
+                    (*k)->quantity(0);
                     break;
                 }
             }
@@ -55,11 +55,11 @@ void generateTrade(Order &newOrder, std::vector<std::shared_ptr<Order>> &openOrd
     if (newOrder.quantity() < 0) // sell order
     {
         // find buy orders in order book matching instument and acceptable price
-        for (int j = 0; j != openOrder.size(); ++j)
+        for (std::vector<std::shared_ptr<Order>>::iterator j = openOrder.begin(); j != openOrder.end(); ++j)
         {
-            if (newOrder.instrument() == openOrder[j]->instrument() && openOrder[j]->quantity() > 0 && openOrder[j]->price() >= newOrder.price())
+            if (newOrder.instrument() == (*j)->instrument() && (*j)->quantity() > 0 && (*j)->price() >= newOrder.price())
             {
-                candidate.push_back(openOrder[j]);
+                candidate.push_back(*j);
             }
         }
 
@@ -73,22 +73,22 @@ void generateTrade(Order &newOrder, std::vector<std::shared_ptr<Order>> &openOrd
                 return lhs->price() > rhs->price();
             });
             // matching new order with candidates in order book
-            for (int k = 0; k != candidate.size(); ++k)
+            for (std::vector<std::shared_ptr<Order>>::iterator k = candidate.begin(); k != candidate.end(); ++k)
             {
-                myTrade.push_back(std::make_shared<Trade>(candidate[k]->name(), newOrder.name(), newOrder.instrument(), std::min(-1 * newOrder.quantity(), candidate[k]->quantity()), candidate[k]->price()));
-                if (-1 * newOrder.quantity() < candidate[k]->quantity())
+                myTrade.push_back(Trade((*k)->name(), newOrder.name(), newOrder.instrument(), std::min(-1 * newOrder.quantity(), (*k)->quantity()), (*k)->price()));
+                if (-1 * newOrder.quantity() < (*k)->quantity())
                 {
-                    candidate[k]->quantity(candidate[k]->quantity() + newOrder.quantity());
+                    (*k)->quantity((*k)->quantity() + newOrder.quantity());
                     break;
                 }
-                else if (-1 * newOrder.quantity() > candidate[k]->quantity())
+                else if (-1 * newOrder.quantity() > (*k)->quantity())
                 {
-                    newOrder.quantity(newOrder.quantity() + candidate[k]->quantity());
-                    candidate[k]->quantity(0);
+                    newOrder.quantity(newOrder.quantity() + (*k)->quantity());
+                    (*k)->quantity(0);
                 }
                 else
                 {
-                    candidate[k]->quantity(0);
+                    (*k)->quantity(0);
                     break;
                 }
             }

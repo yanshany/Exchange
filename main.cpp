@@ -12,7 +12,7 @@ int main()
 	std::string s;
 	const std::string delimiter = ":";
 	Order newOrder;
-	std::vector<std::shared_ptr<Trade>> myTrade;
+	std::vector<Trade> myTrade;
 	std::vector<std::shared_ptr<Order>> openOrder;
 
 	std::getline(std::cin,s);
@@ -24,10 +24,9 @@ int main()
 		generateTrade(newOrder,openOrder,myTrade);
 	}
 
-	for (int i = 0; i != myTrade.size(); ++i)
+	for (std::vector<Trade>::iterator i = myTrade.begin(); i != myTrade.end(); i++)
 	{
-		myTrade[i]->print();
-//		cout << myTrade[i] << std::endl;
+		(*i).print();
 	}
 
 }
