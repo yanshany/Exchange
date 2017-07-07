@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 
-Order parseLineToOrder(std::string &s, std::string delimiter)
+order parseLineToOrder(std::string& s, std::string delimiter)
 {
     size_t pos;
     std::string name, instrument;
@@ -24,7 +24,7 @@ Order parseLineToOrder(std::string &s, std::string delimiter)
 
     std::istringstream(s) >> price;
 
-    Order myOrder(name, instrument, quantity, price);
+    order myOrder(name, instrument, quantity, price);
 
     return myOrder;
 };

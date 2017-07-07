@@ -1,8 +1,8 @@
-#ifndef Trade_HPP
-#define Trade_HPP
+#ifndef trade_HPP
+#define trade_HPP
 #include <string>
 
-class Trade
+class trade
 {
   private:
 	std::string m_name1;
@@ -12,9 +12,9 @@ class Trade
 	double m_price;
 
   public:
-	Trade();
+	trade();
 
-	Trade(std::string _name1, std::string _name2, std::string _instrument, int _quantity, double _price);
+	trade(std::string _name1, std::string _name2, std::string _instrument, int _quantity, double _price);
 
 	const std::string name1() const { return m_name1; }
 

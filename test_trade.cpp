@@ -8,7 +8,7 @@ int main()
     std::string instrument("AUDUSD");
     int quantity = 100;
     double price = 0.7838;
-    Trade myTrade(name1, name2, instrument, quantity, price);
+    trade myTrade(name1, name2, instrument, quantity, price);
     myTrade.print();
     assert(myTrade.name1() == name1);
     assert(myTrade.name2() == name2);

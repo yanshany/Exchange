@@ -4,5 +4,5 @@
 #include "trade.hpp"
 #include <vector>
 #include <memory>
-void generateTrade(Order &newOrder, std::vector<std::shared_ptr<Order>> &openOrder, std::vector<Trade> &myTrade);
+void generateTrade(order& newOrder, std::vector<std::shared_ptr<order>>& openOrder, std::vector<trade>& myTrade);
 #endif

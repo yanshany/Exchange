@@ -1,8 +1,8 @@
-#ifndef Order_HPP
-#define Order_HPP
+#ifndef order_HPP
+#define order_HPP
 #include <string>
 
-class Order
+class order
 {
 private:
 	std::string m_name;
@@ -11,9 +11,9 @@ private:
 	double m_price;
 
 public:
-	Order();
+	order();
 
-	Order(const std::string _name, const std::string _instrument, int _quantity, double _price);
+	order(const std::string _name, const std::string _instrument, int _quantity, double _price);
 
 	const std::string name() const { return m_name; }
 	void name(const std::string value) { m_name = value; }

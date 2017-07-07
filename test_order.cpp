@@ -7,7 +7,7 @@ int main()
     std::string instrument("AUDUSD");
     int quantity = 100;
     double price = 0.7838;
-    Order myOrder(name, instrument, quantity, price);
+    order myOrder(name, instrument, quantity, price);
     myOrder.print();
     assert(myOrder.name() == name);
     assert(myOrder.instrument() == instrument);

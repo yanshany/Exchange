@@ -1,9 +1,9 @@
 #include "trade.hpp"
 #include <iostream>
 
-Trade::Trade(){};
+trade::trade(){};
 
-Trade::Trade(std::string _name1, std::string _name2, std::string _instrument, int _quantity, double _price)
+trade::trade(std::string _name1, std::string _name2, std::string _instrument, int _quantity, double _price)
 {
     m_name1 = _name1;
     m_name2 = _name2;
@@ -12,7 +12,7 @@ Trade::Trade(std::string _name1, std::string _name2, std::string _instrument, in
     m_price = _price;
 }
 
-void Trade::print() const
+void trade::print() const
 {
     std::cout << m_name1 << ":" << m_name2 << ":" << m_instrument << ":" << m_quantity << ":" << m_price << std::endl;
 }
