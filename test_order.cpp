@@ -1,5 +1,6 @@
 #include "order.hpp"
 #include <cassert>
+#include <iostream>
 
 int main()
 {
@@ -8,10 +9,11 @@ int main()
     int quantity = 100;
     double price = 0.7838;
     order myOrder(name, instrument, quantity, price);
-    myOrder.print();
     assert(myOrder.name() == name);
     assert(myOrder.instrument() == instrument);
     assert(myOrder.quantity() == quantity);
     assert(myOrder.price() == price);
+    std::cout << myOrder << std::endl;
     return 0;
+
 }

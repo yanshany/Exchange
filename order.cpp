@@ -1,5 +1,4 @@
 #include "order.hpp"
-#include <iostream>
 
 order::order(){};
 
@@ -11,19 +10,9 @@ order::order(const std::string _name, const std::string _instrument, int _quanti
     price(_price);
 }
 
-void order::print() const
+std::ostream& operator<<(std::ostream& os, const order& order)
 {
-    std::cout << m_name << ":" << m_instrument << ":" << m_quantity << ":" << m_price << std::endl;
-}
-
-/* ostream& operator<<(ostream& os, const order& order)
-{
-    os << m_name << ":" << m_instrument << ":" << m_quantity << ":" << m_price;
+    os << order.m_name << ":" << order.m_instrument << ":" << order.m_quantity << ":" << order.m_price;
     return os;
 }
 
-
-cerr << order << std::endl;
-
-cout << "order: " << order << std::endl;
-*/

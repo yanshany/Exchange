@@ -2,7 +2,9 @@
 #define orderBook_HPP
 #include <string>
 #include <vector>
+#include <iostream>
 #include "order.hpp"
+
 class orderBook
 {
 public:
@@ -13,7 +15,7 @@ public:
     
     void addAnOrder(order& newOrder);
     
-    void print();
+    friend std::ostream& operator<<(std::ostream& os, const orderBook& orderBook);
 
 };
 

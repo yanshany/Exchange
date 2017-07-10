@@ -24,7 +24,7 @@ int main()
 
 	for (std::vector<trade>::iterator i = myTrade.begin(); i != myTrade.end(); i++)
 	{
-		i->print();
+        std::cout << *i;
 	}
 
 }

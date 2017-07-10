@@ -26,7 +26,7 @@ class trade
 
 	double price() const { return m_price; }
 
-	void print() const;
+    friend std::ostream& operator<<(std::ostream& os, const trade& trade);
 };
 
 #endif

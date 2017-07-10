@@ -1,6 +1,7 @@
 #ifndef order_HPP
 #define order_HPP
 #include <string>
+#include <iostream>
 
 class order
 {
@@ -26,8 +27,8 @@ public:
 
 	double price() const { return m_price; }
 	void price(double value) { m_price = value; }
-
-	void print() const;
+    
+    friend std::ostream& operator<<(std::ostream& os, const order& order);
 };
 
 #endif

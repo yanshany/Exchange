@@ -1,6 +1,4 @@
 #include "orderBook.hpp"
-#include "order.hpp"
-#include <iostream>
 orderBook::orderBook(){};
 
 void orderBook::addAnOrder(order& newOrder)
@@ -31,20 +29,18 @@ void orderBook::addAnOrder(order& newOrder)
     }
 }
 
-void orderBook::print()
+std::ostream& operator<<(std::ostream& os, const orderBook& orderBook)
 {
-    std::cout << "ask" << std::endl;
-    
-    std::vector<order>::iterator it;
-    
-    for (it = ask.begin(); it != ask.end(); ++it)
+    os << "ask" << std::endl;
+    for (std::vector<order>::const_iterator it = orderBook.ask.begin(); it != orderBook.ask.end(); ++it)
     {
-        it->print();
+        os << *it;
     }
-    std::cout << "bid" << std::endl;
-    
-    for (it = bid.begin(); it != bid.end(); ++it)
+    os << "bid" << std::endl;
+    for (std::vector<order>::const_iterator it = orderBook.bid.begin(); it != orderBook.bid.end(); ++it)
     {
-        it->print();
+        os << *it;
     }
+    os << std::endl;
+    return os;
 }

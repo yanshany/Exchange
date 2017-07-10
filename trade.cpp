@@ -12,7 +12,8 @@ trade::trade(std::string _name1, std::string _name2, std::string _instrument, in
     m_price = _price;
 }
 
-void trade::print() const
+std::ostream& operator<<(std::ostream& os, const trade& trade)
 {
-    std::cout << m_name1 << ":" << m_name2 << ":" << m_instrument << ":" << m_quantity << ":" << m_price << std::endl;
+    os << trade.m_name1 << ":" << trade.m_name2 << ":" << trade.m_instrument << ":" << trade.m_quantity << ":" << trade.m_price << std::endl;
+    return os;
 }

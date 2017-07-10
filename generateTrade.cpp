@@ -1,10 +1,4 @@
-#include "order.hpp"
-#include "orderBook.hpp"
-#include "trade.hpp"
 #include "generateTrade.hpp"
-#include <algorithm>
-#include <memory>
-#include <iostream>
 void generateTrade(order& newOrder, std::map<std::string, orderBook>& wholeBook, std::vector<trade>& myTrade)
 {
     if (wholeBook.count(newOrder.instrument()) == 0)

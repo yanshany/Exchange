@@ -21,8 +21,8 @@ int main()
 
 //    orderBookEachMarket.addAnOrder(order2);
 //    orderBookEachMarket.addAnOrder(order3);
-    orderBookEachMarket.print();
-    
+    std::cout << orderBookEachMarket;
+
     std::map<std::string, orderBook> wholeBook;
     wholeBook["AUDUSD"] = orderBookEachMarket;
 
@@ -117,7 +117,8 @@ int main()
     }
 
     
-    wholeBook["AUDUSD"].print();
-    myTrade[0].print();
+    std::cout << wholeBook["AUDUSD"];
+    std::cout << myTrade[0];
     return 0;
+ 
 }
