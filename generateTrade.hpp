@@ -3,6 +3,7 @@
 #include "order.hpp"
 #include "trade.hpp"
 #include <vector>
+#include <map>
 #include <memory>
-void generateTrade(order& newOrder, std::vector<std::shared_ptr<order>>& openOrder, std::vector<trade>& myTrade);
+void generateTrade(order& newOrder, std::map<std::string, orderBook>& wholeBook, std::vector<trade>& myTrade);
 #endif
