@@ -12,7 +12,7 @@
 int main()
 {
 	std::string s;
-	const std::string delimiter = ":";
+	char delimiter = ':';
 	std::vector<trade> myTrade;
 	std::map<std::string, orderBook> wholeBook;
 

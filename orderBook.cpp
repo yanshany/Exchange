@@ -34,13 +34,12 @@ std::ostream& operator<<(std::ostream& os, const orderBook& orderBook)
     os << "ask" << std::endl;
     for (std::vector<order>::const_iterator it = orderBook.ask.begin(); it != orderBook.ask.end(); ++it)
     {
-        os << *it;
+        os << *it <<std::endl;
     }
     os << "bid" << std::endl;
     for (std::vector<order>::const_iterator it = orderBook.bid.begin(); it != orderBook.bid.end(); ++it)
     {
-        os << *it;
+        os << *it << std::endl;
     }
-    os << std::endl;
     return os;
 }
